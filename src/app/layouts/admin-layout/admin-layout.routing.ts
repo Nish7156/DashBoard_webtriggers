@@ -10,8 +10,8 @@ import { UserInfoRegisterComponent } from 'src/app/pages/user-info-register/user
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard/:id',      component: DashboardComponent },
     { path: 'user-profile/:id',   component: UserProfileComponent },
-    { path: 'tables',         component: TablesComponent },
+    { path: 'tables/:id',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'maps',           component: MapsComponent },
-    { path: 'user-info-register', component: UserInfoRegisterComponent }
+    { path: 'fullregister/:id', component: UserInfoRegisterComponent }
 ];

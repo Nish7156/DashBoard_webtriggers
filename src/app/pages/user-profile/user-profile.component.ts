@@ -73,12 +73,12 @@ public href: string = "";
    }
 
    ids(){
-     this.http.get('http://localhost:4400/users/'+this.id).subscribe(data => {
+     this.http.get('https://webtriggersusersapi.herokuapp.com/users/'+this.id).subscribe(data => {
       this.usermaininfo = data;
       console.log(this.usermaininfo, 'Get-Data-login');
    });
    
-      this.http.get<any>('http://localhost:8080/api/users/2').subscribe(data => {
+      this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/').subscribe(data => {
         console.log(data,'Getdata-ID');
         this.userinfo = data;
     });

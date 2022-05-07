@@ -12,7 +12,7 @@ export class CommonServiceService {
 
   onSubmit(data) {
     console.log(data.value, 'data');
-    this.http.post<any>('http://localhost:4400/users/authenticate',data.value).subscribe(data => {
+    this.http.post<any>('https://webtriggersusersapi.herokuapp.com/users/authenticate',data.value).subscribe(data => {
       console.log(data, 'Postdata');
      // this.userinfo = data;
      // console.log(this.userinfo, 'userinfo');
@@ -23,23 +23,23 @@ export class CommonServiceService {
      })
     }
     loogin(data){
-      return this.http.post('http://localhost:4400/users/authenticate',data);
+      return this.http.post('https://webtriggersusersapi.herokuapp.com/users/authenticate',data);
     }
 
   loginData(){
-   return this.http.get('http://localhost:4400/users');
+   return this.http.get('https://webtriggersusersapi.herokuapp.com/users');
    }
 
    loginPost(data){
-    return this.http.post('http://localhost:4400/users/register',data);
+    return this.http.post('https://webtriggersusersapi.herokuapp.com/users/register',data);
     }
 
 
     userDataPost(data){
-      return this.http.post('http://localhost:8080/api/users',data);
+      return this.http.post('https://webtriggersusersapi.herokuapp.com/users/',data);
     }
     userDataGet(){
-      return this.http.get('http://localhost:8080/api/users');
+      return this.http.get('https://webtriggersusersapi.herokuapp.com/users/');
     }
 
 

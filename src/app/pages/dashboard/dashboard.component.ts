@@ -78,4 +78,7 @@ export class DashboardComponent implements OnInit {
     this.salesChart.update();
   }
 
+
+  
+
 }
