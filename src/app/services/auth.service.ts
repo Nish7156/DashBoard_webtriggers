@@ -1,44 +1,50 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+    token: any;
+    userid: any;
 
-  constructor() { }
+    constructor(private http:HttpClient,public fb: FormBuilder,private router: Router) { }
 
-  private tokenKey:string = 'app_token';
 
-  private store(content:Object) {
-      localStorage.setItem(this.tokenKey, JSON.stringify(content));
-  }
 
-  private retrieve() {
-      let storedToken:string = localStorage.getItem(this.tokenKey);
-      if(!storedToken) throw 'no token found';
-      return storedToken;
-  }
+    PostDataUser(data:any): Observable<any> {
+       // console.log(data, 'Postdata');
+        return this.http.post('https://webtriggersusersapi.herokuapp.com/users/authenticate',data);
+         }
+        
 
-  public generateNewToken() {
-      let token:string = '...';//custom token generation;
-      let currentTime:number = (new Date()).getTime() ;
-      this.store({ttl: currentTime, token});
-  }
 
-  public retrieveToken() {
+  //getUserData(){
+   // let auth_token=this.token;
+   // const header=new HttpHeaders({
+   //   'Content-Type': 'application/json',
+  //    'Authorization': 'Bearer '+auth_token
+  //  });
+  //  const requestOptions = { headers: header };
+  //  this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+this.userid,requestOptions).subscribe(data => {
+   //   console.log(data, 'Armani');
+      //this.login.reset();
+  //});
+  //}
 
-      let currentTime:number = (new Date()).getTime(), token = null;
-      try {
-          let storedToken = JSON.parse(this.retrieve());
-          if(storedToken.ttl < currentTime) throw 'invalid token found';
-          token = storedToken.token;
-      }
-      catch(err) {
-          console.error(err);
-      }
-      return token;
+  getUserData(): Observable<any>{
+        let auth_token=localStorage.getItem('token');
+        const header=new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+auth_token
+        });
+        const requestOptions = { headers: header };
+        return this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+localStorage.getItem('userid'),requestOptions);
 
-  }
+    }
 
 }
 

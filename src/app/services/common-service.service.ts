@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,16 @@ export class CommonServiceService {
     }
 
 
-    userDataPost(data){
-      return this.http.post('https://webtriggersusersapi.herokuapp.com/users/',data);
-    }
+    putUserData(data:any): Observable<any>{
+      let auth_token=localStorage.getItem('token');
+      const header=new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+auth_token
+      });
+      const requestOptions = { headers: header };
+      return this.http.put<any>('https://webtriggersusersapi.herokuapp.com/users/'+localStorage.getItem('userid'),requestOptions,data.value);
+
+  }
     userDataGet(){
       return this.http.get('https://webtriggersusersapi.herokuapp.com/users/');
     }

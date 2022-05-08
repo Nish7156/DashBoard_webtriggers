@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { LoginComponent } from './pages/login/login.component';
+import { SuccessComponent } from './dilogbox/success.component';
+import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { LoginComponent } from './pages/login/login.component';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    SuccessComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
   public location: Location;
   userPersonalData:any;
   
-  constructor(location: Location,  private element: ElementRef, private router: Router,private route: ActivatedRoute,private http:HttpClient) {
+  constructor(location: Location, private authservice:AuthService,  private element: ElementRef, private router: Router,private route: ActivatedRoute,private http:HttpClient) {
     this.location = location;
   }
 
@@ -49,18 +50,28 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  getUserData(){
-    let auth_token=localStorage.getItem('token');
-    const header=new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+auth_token
-    });
-    const requestOptions = { headers: header };
-    this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+localStorage.getItem('userid'),requestOptions).subscribe(data => {
-      console.log(data, 'Armani_Local');
-      this.userPersonalData = data;
-      console.log(this.userPersonalData, 'userPersonalData');
+ // getUserData(){
+ //   let auth_token=localStorage.getItem('token');
+ //   const header=new HttpHeaders({
+ //     'Content-Type': 'application/json',
+ //     'Authorization': 'Bearer '+auth_token
+ //   });
+ //   const requestOptions = { headers: header };
+ //   this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+localStorage.getItem('userid'),requestOptions).subscribe(data => {
+  //    console.log(data, 'Armani_Local');
+//this.userPersonalData = data;
+  //    console.log(this.userPersonalData, 'userPersonalData');
       //this.login.reset();
+  //});
+  //}
+
+  getUserData(){
+    this.authservice.getUserData().subscribe(data => {
+     console.log(data, 'Get-Data');
+     this.userPersonalData = data;
+     console.log(this.userPersonalData, 'Get-Data');
+
   });
-  }
+ }
+  
 }
