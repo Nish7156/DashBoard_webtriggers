@@ -14,7 +14,7 @@ jobs:
     - run: npm install
     - run: npm install -g @angular/cli > /dev/null
     - run: ng build --prod --output-path=dist 
-    - name: Nishant
+    - name: Publish generated content to GitHub Pages
       with:
           dir: dist
           branch: master
