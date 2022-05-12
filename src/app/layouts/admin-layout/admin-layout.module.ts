@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
  import { ToastrModule } from 'ngx-toastr';
 import { UserInfoRegisterComponent } from '../../pages/user-info-register/user-info-register.component';
 
+import { MaterialModule } from '../../material/material.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { UserInfoRegisterComponent } from '../../pages/user-info-register/user-i
     NgbModule,
     ClipboardModule,
     ToastrModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   declarations: [
     DashboardComponent,
