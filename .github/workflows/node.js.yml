@@ -30,7 +30,7 @@ jobs:
     - name: NPM build Angular Production
       run: ng build --prod
     - name: Delete Existing Files
-      run : sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /home/runcloud/webapps/viuweb/*'
+ 
 
     - name: Compress and Copy New Files to server
       run : |
