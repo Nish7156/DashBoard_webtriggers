@@ -15,7 +15,7 @@ jobs:
     - run: npm install -g @angular/cli > /dev/null
     - run: ng build --prod --output-path=dist 
     - name: Publish generated content to GitHub Pages
-      uses: actions/upload-artifact@v3.0.0
+      uses: DashBoard_webtriggers/dist@v3.0.0
       with:
           path: dist
           branch: master
