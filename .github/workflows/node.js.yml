@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   build:
     # using Ubuntu
@@ -31,6 +30,14 @@ jobs:
     - name: NPM build Angular Production
       run: ng build --prod
     - name: Delete Existing Files
- 
+      run : sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /home/runcloud/webapps/viuweb/*'
 
-    
+    - name: Compress and Copy New Files to server
+      run : |
+            cd dist/Viusasa/
+            tar -czvf ../../viusasa.tar.gz ./
+            cd ..
+            cd ..
+            sudo sshpass -p ${{ secrets.SSH_PASS }} scp -v -o StrictHostKeyChecking=no -r viusasa.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/runcloud/webapps/viuweb
+    - name: Uncompress new Files
+      run : sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /home/runcloud/webapps/viuweb/ && tar -xzvf viusasa.tar.gz && rm viusasa.tar.gz'
