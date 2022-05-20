@@ -10,8 +10,13 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build --prod
+      - name: cypress run
+        uses: cypress-io/github-action@v2
+        with:
+              build: npm run build
+              start: npm start
+      - name: jest run
+        run: npm test
+        
+        
 
