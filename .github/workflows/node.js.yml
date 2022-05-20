@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: npm install and npm run build
+      - name: npm install and npm run build --prod
         run: |
           npm i
           npm run build:prod
