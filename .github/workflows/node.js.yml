@@ -8,16 +8,18 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: npm install and npm run build --prod
-        run: |
-          npm i
-          npm run build: npm run build --prod
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "dist"
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.8
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.8
+    - name: Install dependencies
+      run: npm install
+    - name: Lint
+      run: npm run lint
+    - name: Build
+      run: npm run build -- --prod
+        
     
  
         
