@@ -10,11 +10,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: cypress run
-        uses: cypress-io/github-action@v2
-        with:
-              build: npm run build
-              dir: dist
+      - name: Build
+        run: |
+          npm run build -- --prod
+    
  
         
         
