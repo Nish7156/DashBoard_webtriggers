@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { SuccessComponent } from 'src/app/dilogbox/success.component';
 import { CommonServiceService } from 'src/app/services/common-service.service';
@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
 
   signup: FormGroup; 
   router: any;
+  pass:any[] |undefined;
 
   constructor(public dialog: MatDialog,private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService) { }
 
@@ -26,12 +27,14 @@ export class RegisterComponent implements OnInit {
 
   Contact(){
     this.signup = new FormGroup({
-      username: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      password: new FormControl(''),
+      username: new FormControl('',[Validators.email,Validators.required]),
+      firstName: new FormControl('',[Validators.required,Validators.minLength(3)]),
+      lastName: new FormControl('',[Validators.required,Validators.minLength(3)]),
+      password: new FormControl('555555555555555555',[Validators.required,Validators.minLength(5-10)]),
+      checkbox: new FormControl('',[Validators.required]),
     });
   }
+  
 
   onSubmit(data: FormGroup) {
     this.service.loginPost(data.value).subscribe(data => {

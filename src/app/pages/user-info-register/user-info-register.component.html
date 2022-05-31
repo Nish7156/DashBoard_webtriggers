@@ -91,15 +91,20 @@
                     </div>
                     <div class="row">
                       <div class="col-md-12">
-                        <div class="form-group">
                           <label class="form-control-label" for="input-address">Image Link</label>
-                          <input id="input-address" class="form-control form-control-alternative" placeholder="Image Link" formControlName="image" type="text">
+                          <input  placeholder="Image Link"  type="file" (change)="onFileSelect($event)" >
+                        <div *ngIf="imageData">
+                          <img [src]="imageData" [alt]="userData.value.name">
+                        </div>
+                        </div>
+                        <div class="col-md-12">
+                          <label class="form-control-label" for="input-address">Image Link</label>
+                          <input  placeholder="Image Link"  type="text" for="input-address" formControlName="image">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
               <hr class="my-4" />
               <!-- Description -->
               <h6 class="heading-small text-muted mb-4">About me</h6>

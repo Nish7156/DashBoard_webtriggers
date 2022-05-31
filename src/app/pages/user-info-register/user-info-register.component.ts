@@ -14,6 +14,7 @@ import { CommonServiceService } from 'src/app/services/common-service.service';
 export class UserInfoRegisterComponent implements OnInit {
 
   userData: FormGroup;
+  imageData:string;
 
   usersData:any=[];
   userPersonalData:any;
@@ -38,6 +39,7 @@ export class UserInfoRegisterComponent implements OnInit {
   }
 
   onSubmit(data: FormGroup) {
+    this.imageData=null;
     console.log(data.value, 'data');
     let auth_token=localStorage.getItem('token');
     const header=new HttpHeaders({
@@ -51,6 +53,14 @@ export class UserInfoRegisterComponent implements OnInit {
       this.openDialog();
 
   });
+  }
+
+  onFileSelect(event:Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.userData.patchValue({ image:file });
+    const allowMineTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+   console.log(file, 'file');
+
   }
  openDialog() {
       this.dialog.open(SuccessComponent);

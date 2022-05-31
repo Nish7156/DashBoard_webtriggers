@@ -45,6 +45,16 @@ export class AuthService {
         return this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+localStorage.getItem('userid'),requestOptions);
 
     }
+    getAllUserData(): Observable<any>{
+        let auth_token=localStorage.getItem('token');
+        const header=new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+auth_token
+        });
+        const requestOptions = { headers: header };
+        return this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users',requestOptions);
+
+    }
 
 }
 

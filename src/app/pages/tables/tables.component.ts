@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-tables',
@@ -13,7 +14,7 @@ export class TablesComponent implements OnInit {
   id=this.route.snapshot.paramMap.get('id');
   ids:any=[];
 
-  constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute) { }
+  constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,public auth:AuthService) { }
 
   ngOnInit() {
     this.car();
@@ -21,14 +22,12 @@ export class TablesComponent implements OnInit {
 
 
   car(){
-    this.http.get('https://webtriggersusersapi.herokuapp.com/users/').subscribe(data => {
-      this.Users = data;
-      console.log(this.Users, 'All-Data-login');
-   });
-   localStorage.setItem('test', this.id);
-   console.log(localStorage.getItem('test'), 'localStorage');
-   sessionStorage.setItem('test', this.id);
-    console.log(sessionStorage.getItem('test'), 'sessionStorage');
-  }
+   this.auth.getAllUserData().subscribe(data=>{
+      this.Users=data;
+      console.log(this.Users,'Users');
+      }
+    );
+    }
+   
 
 }
