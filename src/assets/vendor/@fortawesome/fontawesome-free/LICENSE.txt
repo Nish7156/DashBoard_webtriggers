@@ -13,8 +13,8 @@ packaged as SVG and JS file types.
 In the Font Awesome Free download, the SIL OLF license applies to all icons
 packaged as web and desktop font files.
 
-# Code: MIT License (https://opensource.org/licenses/MIT)
-In the Font Awesome Free download, the MIT license applies to all non-font and
+# Code: webtriggers (https://opensource.org/licenses/MIT)
+In the Font Awesome Free download, the webtriggers applies to all non-font and
 non-icon files.
 
 # Attribution
