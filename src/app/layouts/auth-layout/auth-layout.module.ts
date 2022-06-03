@@ -6,6 +6,8 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RegisterComponent } from '../../pages/register/register.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { SuccessComponent } from 'src/app/dilogbox/success.component';
 
 @NgModule({
   imports: [
@@ -13,10 +15,11 @@ import { RegisterComponent } from '../../pages/register/register.component';
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
      NgbModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+     MaterialModule
   ],
   declarations: [
-    RegisterComponent
+    RegisterComponent,
   ]
 })
 export class AuthLayoutModule { }

@@ -19,6 +19,7 @@ import { LoaderComponent } from './common/loader/loader.component';
 import { HttpModule } from '@angular/http';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { LoaderInterceptorService } from './interceptors/loader-interceptor.serv
     AppRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
+    SocialLoginModule,
     HttpModule
   ],
   declarations: [
@@ -43,7 +45,22 @@ import { LoaderInterceptorService } from './interceptors/loader-interceptor.serv
     SuccessComponent
   ],
   providers: [ LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },],
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

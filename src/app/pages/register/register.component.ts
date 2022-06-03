@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { SuccessComponent } from 'src/app/dilogbox/success.component';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import {MatDialog} from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog.service';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-register',
@@ -13,11 +15,13 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class RegisterComponent implements OnInit {
 
+  user: SocialUser;
   signup: FormGroup; 
   router: any;
-  pass:any[] |undefined;
+  pass:any;
 
-  constructor(public dialog: MatDialog,private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService) { }
+  constructor(private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
+    private dialog: DialogService,public authService:SocialAuthService) { }
 
   ngOnInit() {
     this.Contact();
@@ -40,10 +44,32 @@ export class RegisterComponent implements OnInit {
     this.service.loginPost(data.value).subscribe(data => {
       console.log(data, 'Postdata');
       this.signup.reset();
-      this.openDialog();
+      this.redirectToLogin();
     }
     )
      }
+
+
+     signInWithGoogle(): void {
+      this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+      console.log(this.authService.authState, 'authState');
+      this.authService.authState.subscribe(user => {
+        this.user = user;
+        console.log('user', user);
+      });
+    }
+  
+  
+    signOut(): void {
+      this.authService.signOut();
+    }
+  
+    refreshGoogleToken(): void {
+      this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+    }
+
+
+    
 
      bar(){
       this.service.loginData().subscribe(data => {
@@ -56,8 +82,13 @@ export class RegisterComponent implements OnInit {
       )
      }
 
-     openDialog() {
-      this.dialog.open(SuccessComponent);
-    }
-
+redirectToLogin() {
+  this.dialog
+    .confirmDialog({
+      title: 'Successfully Registered',
+      message: 'Login to continue',
+      confirmCaption: 'Yes',
+      cancelCaption: 'No',
+    })
+}
 }

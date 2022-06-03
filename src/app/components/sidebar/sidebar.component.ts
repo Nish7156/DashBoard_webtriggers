@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/pages/login/login.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare interface RouteInfo {
     path: string;
@@ -28,14 +29,21 @@ export class SidebarComponent implements OnInit {
 
   public menuItems: any[];
   public isCollapsed = true;
+  userdata:any;
 
-  constructor(private router: Router,public servicess:LoginComponent) { }
+  constructor(private router: Router,public servicess:LoginComponent, public authservice:AuthService) { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });
+
+   this.authservice.getUserData().subscribe(data=>{
+      this.userdata=data.image;
+      console.log(this.userdata,"userdata-img");
+    }
+    );
   }
 
 

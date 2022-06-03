@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserInfoRegisterComponent } from '../../pages/user-info-register/user-info-register.component';
 
 import { MaterialModule } from '../../material/material.module';
+import { FormComponent } from 'src/app/pages/popupform/form.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MaterialModule } from '../../material/material.module';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    UserInfoRegisterComponent
+    UserInfoRegisterComponent,
+    FormComponent
   ]
 })
 

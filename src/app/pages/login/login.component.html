@@ -28,7 +28,7 @@
               <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
               <span class="btn-inner--text">Github</span>
             </a>
-            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+            <a href="javascript:void(0)" (click)="signInWithGoogle()" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
               <span class="btn-inner--text">Google</span>
             </a>
@@ -85,3 +85,35 @@
   </div>
 </div>
 <h1>{{userid}}</h1>
+<form [formGroup]="googleData" (ngSubmit)="newUserSignup(googleData.value)">
+<div *ngIf="user" class="card text-center">
+  <h6 class="card-header">
+    Social Login Demo
+  </h6>
+  <div class="card-block"></div>
+  <img *ngIf="user.photoUrl" class="card-img-top img-responsive photo" src="{{ user.photoUrl }}">
+  <div class="card-block">
+    <h4 class="card-title" formControlName="password">{{ user.name }}</h4>
+    <p class="card-text"  >{{ user.firstName }}</p>
+    <label for="username">username</label>
+    <input type="text" formControlName="username" value="{{user.username}}">
+    <label for="">F-name</label>
+    <input type="text" formControlName="firstName" value="{{user.firstName}}">{{user.firstName}}
+    <input type="text" formControlName="lastName" value="{{user.lastName}}">lat
+    <input type="text" formControlName="password" value="{{user.username}}">pass
+    <input type="text" formControlName="{{user.firstName}}"  value="{{user.firstName}}" >
+    <input type="text" id="input-first-name" class="form-control form-control-alternative" formControlName="firstName" value="{{user.firstName}}" disabled>
+    <p class="card-text">{{ user.email }}</p>
+    <p class="card-text">Logged in with {{ user.provider }}</p>
+  </div>
+  <div class="card-block">
+    <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+  </div>
+  <div class="card-block" *ngIf="user.provider === GoogleLoginProvider.PROVIDER_ID">
+    <button class="btn" (click)="refreshGoogleToken()">Refresh google token</button>
+  </div>
+  <div class="card-block">
+    <button type="submit"  class="btn btn-primary my-4">Sign in</button>
+  </div>
+</div>
+</form>

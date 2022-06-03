@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { SuccessComponent } from 'src/app/dilogbox/success.component';
 import { CommonServiceService } from 'src/app/services/common-service.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +20,8 @@ export class UserInfoRegisterComponent implements OnInit {
   usersData:any=[];
   userPersonalData:any;
 
-  constructor(public dialog: MatDialog,private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService) { }
+  constructor(private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
+    private dialog: DialogService) { }
 
   ngOnInit() {
     this.Contact();
@@ -63,7 +65,16 @@ export class UserInfoRegisterComponent implements OnInit {
 
   }
  openDialog() {
-      this.dialog.open(SuccessComponent);
+  this.dialog
+     .confirmDialog({
+       title: 'Successfully Update',
+       message: '',
+       confirmCaption: 'Ok',
+      cancelCaption: '',
+     })
+     .subscribe((yes) => {
+       if (yes) console.log('The user said YES');
+     });
     }
 
    //For Local Storage

@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmDialogData } from '../models/confirm-dialog-data';
 
 @Component({
   selector: 'app-login',
@@ -13,17 +15,20 @@ import { AuthService } from 'src/app/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SuccessComponent implements OnInit, OnDestroy {
+export class SuccessComponent implements OnInit {
+
+  register=false;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,private route:ActivatedRoute,private router: Router) {}
 
   
 
-
-  constructor() { }
-    ngOnDestroy(): void {
-        
-    }
-
   ngOnInit() {
+    console.log(this.router.url)
+    if(this.router.url=='/register'){
+      this.register=true;
+    }
+    
   }
   
 

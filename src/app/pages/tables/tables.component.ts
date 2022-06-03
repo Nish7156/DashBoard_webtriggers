@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-tables',
@@ -14,7 +15,8 @@ export class TablesComponent implements OnInit {
   id=this.route.snapshot.paramMap.get('id');
   ids:any=[];
 
-  constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,public auth:AuthService) { }
+  constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,
+    private dialog: DialogService,public auth:AuthService) { }
 
   ngOnInit() {
     this.car();
@@ -28,6 +30,17 @@ export class TablesComponent implements OnInit {
       }
     );
     }
-   
+    yesNoDialog() {
+      this.dialog
+        .confirmDialog({
+          title: 'Are you sure?',
+          message: 'Are you sure you want to do this?',
+          confirmCaption: 'Yes',
+          cancelCaption: 'No',
+        })
+        .subscribe((yes) => {
+          if (yes) console.log('The user said YES');
+        });
+    }
 
 }
