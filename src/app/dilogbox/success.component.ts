@@ -18,6 +18,7 @@ import { ConfirmDialogData } from '../models/confirm-dialog-data';
 export class SuccessComponent implements OnInit {
 
   register=false;
+  color=true;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ConfirmDialogData,private route:ActivatedRoute,private router: Router) {}
 
@@ -27,6 +28,9 @@ export class SuccessComponent implements OnInit {
     console.log(this.router.url)
     if(this.router.url=='/register'){
       this.register=true;
+    }
+    if(this.router.url=='/login'){
+      this.color=false;
     }
     
   }

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
     token: any;
     userid: any;
+    car: any;
 
     constructor(private http:HttpClient,public fb: FormBuilder,private router: Router) { }
 
@@ -17,7 +18,9 @@ export class AuthService {
 
     PostDataUser(data:any): Observable<any> {
        // console.log(data, 'Postdata');
-        return this.http.post('https://webtriggersusersapi.herokuapp.com/users/authenticate',data);
+        this.car = this.http.post('https://webtriggersusersapi.herokuapp.com/users/authenticate',data);
+        console.log(this.car, 'Car variable +++++++++++++++++++++++');
+        return this.car;
          }
         
 

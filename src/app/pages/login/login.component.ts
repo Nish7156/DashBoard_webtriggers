@@ -64,32 +64,31 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(data: FormGroup) {
     console.log(data.value);
-    this.service.PostDataUser(data.value).subscribe(data => {
-      console.log(data, 'Postdata');
-      //this.loader=true;
-      this.userid = data.id;
-      console.log(this.userid, 'userid');
-      localStorage.setItem('userid',this.userid); // setting Local Storage
-      console.log(localStorage.getItem('userid'));
-      this.token = data.token;
-      console.log(this.token, 'token');
-      localStorage.setItem('token',this.token); // setting Local Storage
-      console.log(localStorage.getItem('token'));
-      this.userData = data.data;
-      console.log(this.userData, 'userData');
-      this.login.reset();
-      this.router.navigate(['/fullregister/'+data.id])
-      // this.getUserData();
-      this.service.getUserData();
-      this.login.reset();
-
-  });
- // setInterval(() => {
-  //  if(this.router.url=='/login#!'){
-  //    this.yesNoDialog();
-  //  }
-  //  }, 2000);
-    }
+    this.service.PostDataUser(data.value).subscribe(
+      data => {
+        console.log(data, 'Postdata');
+        //this.loader=true;
+        this.userid = data.id;
+        console.log(this.userid, 'userid');
+        localStorage.setItem('userid',this.userid); // setting Local Storage
+        console.log(localStorage.getItem('userid'));
+        this.token = data.token;
+        console.log(this.token, 'token');
+        localStorage.setItem('token',this.token); // setting Local Storage
+        console.log(localStorage.getItem('token'));
+        this.userData = data.data;
+        console.log(this.userData, 'userData');
+        this.login.reset();
+        this.router.navigate(['/fullregister/'+data.id])
+        // this.getUserData();
+        this.service.getUserData();
+        this.login.reset();
+      },
+      error => {  console.log(data, "+==================") 
+    if(data.status=="VALID"){
+      this.error();
+    }});
+  }
 
     ngOnDestroy() {}
      
@@ -143,6 +142,18 @@ yesNoDialog() {
       message: 'Are you sure you want to do this?',
       confirmCaption: 'Yes',
       cancelCaption: 'No',
+  })
+    .subscribe((yes) => {
+      if (yes) console.log('The user said YES');
+    });
+}
+error() {
+  this.dialog
+    .confirmDialog({
+      title: 'Username or Password is incorrect',
+      message: 'Try Again',
+      confirmCaption: '',
+      cancelCaption: '',
   })
     .subscribe((yes) => {
       if (yes) console.log('The user said YES');

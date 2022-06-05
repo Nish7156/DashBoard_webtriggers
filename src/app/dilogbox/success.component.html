@@ -1,5 +1,5 @@
 <div class="header">
-  <h2 mat-dialog-title>{{data?.title}}</h2>
+  <h2 mat-dialog-title  [ngClass]="{'danger':!color}">{{data?.title}}</h2>
   <button mat-icon-button [mat-dialog-close]="false">
       <mat-icon>close</mat-icon>
   </button>

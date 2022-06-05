@@ -33,12 +33,24 @@ export class TablesComponent implements OnInit {
       });
   }
 
-   onDelete(id){
-     console.log(id,'id');
-     this.auth.deleteUserData(id).subscribe(data=>{
-       console.log(data,'data');
-        this.car();
+   onDelete(id){ {
+      this.dialog
+        .confirmDialog({
+          title: 'Are you sure?',
+          message: 'You are about to delete this record',
+          confirmCaption: 'Yes',
+          cancelCaption: 'No',
+        })
+        .subscribe((yes) => {
+          if (yes) {
+            console.log(id,'id');
+             this.auth.deleteUserData(id).subscribe(data=>{
+            console.log(data,'data');
+            this.car();
       });
+          }
+        });
+    };
    }
 
 

@@ -540,6 +540,26 @@
         <h4 class="modal-title">GeeksForGeeks</h4>
       </div>
       <div class="modal-body" *ngIf="singleData">
+        <mat-form-field appearance="fill">
+          <mat-label value="">First Name</mat-label>
+          <input matInput value="{{singleData.firstName}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput>
+        </mat-form-field>
+        
+
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+       
         <h1>{{singleData.firstName}}</h1>
         <p>One Stop Solution for all CS problems</p>
   
