@@ -14,6 +14,7 @@ export class TablesComponent implements OnInit {
   Users:any=[];
   id=this.route.snapshot.paramMap.get('id');
   ids:any=[];
+  singleData:any;
 
   constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,
     private dialog: DialogService,public auth:AuthService) { }
@@ -21,6 +22,39 @@ export class TablesComponent implements OnInit {
   ngOnInit() {
     this.car();
   }
+
+  onUpdate(id){
+    console.log(id,'id');
+    this.auth.getSingleUserData(id).subscribe(data=>{
+      console.log(data,'Single-data');
+      this.singleData=data;
+      console.log(this.singleData,'Single-data');
+      this.openPopup();
+      });
+  }
+
+   onDelete(id){
+     console.log(id,'id');
+     this.auth.deleteUserData(id).subscribe(data=>{
+       console.log(data,'data');
+        this.car();
+      });
+   }
+
+
+
+   displayStyle = "none";
+  
+   openPopup() {
+     this.displayStyle = "block";
+   }
+   closePopup() {
+     this.displayStyle = "none";
+   }
+
+
+
+
 
 
   car(){
@@ -42,5 +76,6 @@ export class TablesComponent implements OnInit {
           if (yes) console.log('The user said YES');
         });
     }
+    
 
 }

@@ -55,6 +55,37 @@ export class AuthService {
         return this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users',requestOptions);
 
     }
+    deleteUserData(id:any): Observable<any>{
+        let auth_token=localStorage.getItem('token');
+        const header=new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+auth_token
+        });
+        const requestOptions = { headers: header };
+        return this.http.delete<any>('https://webtriggersusersapi.herokuapp.com/users/'+id,requestOptions);
+
+    }
+    UpdateUserData(id:any): Observable<any>{
+        let auth_token=localStorage.getItem('token');
+        const header=new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+auth_token
+        });
+        const requestOptions = { headers: header };
+        return this.http.put<any>('https://webtriggersusersapi.herokuapp.com/users/'+id,requestOptions);
+
+    }
+    getSingleUserData(id:any): Observable<any>{
+        let auth_token=localStorage.getItem('token');
+        const header=new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+auth_token
+        });
+        const requestOptions = { headers: header };
+        return this.http.get<any>('https://webtriggersusersapi.herokuapp.com/users/'+id,requestOptions);
+
+    }
+    
 
 }
 
