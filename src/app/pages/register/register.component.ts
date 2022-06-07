@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { SuccessComponent } from 'src/app/dilogbox/success.component';
@@ -8,6 +8,10 @@ import {MatDialog} from '@angular/material/dialog';
 import { DialogService } from 'src/app/services/dialog.service';
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 
+import { LoaderService } from 'src/app/services/loader.service';
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,7 +24,7 @@ export class RegisterComponent implements OnInit {
   router: any;
   pass:any;
 
-  constructor(private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
+  constructor(public _personService:LoaderService,private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
     private dialog: DialogService,public authService:SocialAuthService) { }
 
   ngOnInit() {

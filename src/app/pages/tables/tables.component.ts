@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-tables',
@@ -16,7 +17,7 @@ export class TablesComponent implements OnInit {
   ids:any=[];
   singleData:any;
 
-  constructor(private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,
+  constructor(public _personService:LoaderService,private http:HttpClient,public fb: FormBuilder,private router: Router,private route:ActivatedRoute,
     private dialog: DialogService,public auth:AuthService) { }
 
   ngOnInit() {

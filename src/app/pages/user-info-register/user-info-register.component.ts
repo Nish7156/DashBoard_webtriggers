@@ -6,6 +6,9 @@ import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import { SuccessComponent } from 'src/app/dilogbox/success.component';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { LoaderComponent } from 'src/app/common/loader/loader.component';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -20,7 +23,7 @@ export class UserInfoRegisterComponent implements OnInit {
   usersData:any=[];
   userPersonalData:any;
 
-  constructor(private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
+  constructor(public _personService:LoaderService,private http:HttpClient,public fb: FormBuilder, private service:CommonServiceService,
     private dialog: DialogService) { }
 
   ngOnInit() {

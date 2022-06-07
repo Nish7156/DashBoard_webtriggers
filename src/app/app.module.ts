@@ -20,6 +20,7 @@ import { HttpModule } from '@angular/http';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptorService } from './interceptors/loader-interceptor.service';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { AvatarPhotosComponent } from './common/avatar-photos/avatar-photos.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
     AuthLayoutComponent,
     LoginComponent,
     LoaderComponent,
-    SuccessComponent
+    SuccessComponent,
+    AvatarPhotosComponent
   ],
   providers: [ LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
