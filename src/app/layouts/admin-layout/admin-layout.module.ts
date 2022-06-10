@@ -17,6 +17,9 @@ import { UserInfoRegisterComponent } from '../../pages/user-info-register/user-i
 
 import { MaterialModule } from '../../material/material.module';
 import { FormComponent } from 'src/app/pages/popupform/form.component';
+import { SharedModule } from '../shared/shared.module';
+import { FreeDraggingDirective } from '../shared/free-dragging.directive';
+import { TaskComponent } from 'src/app/pages/task/task.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,8 @@ import { FormComponent } from 'src/app/pages/popupform/form.component';
     ClipboardModule,
     ToastrModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ],
   declarations: [
     DashboardComponent,
@@ -37,8 +41,10 @@ import { FormComponent } from 'src/app/pages/popupform/form.component';
     IconsComponent,
     MapsComponent,
     UserInfoRegisterComponent,
-    FormComponent
-  ]
+    FormComponent,
+    TaskComponent
+  ],
+  exports: [FreeDraggingDirective], // Added
 })
 
 export class AdminLayoutModule {}

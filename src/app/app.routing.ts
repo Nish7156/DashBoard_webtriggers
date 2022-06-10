@@ -9,11 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AvatarPhotosComponent } from './common/avatar-photos/avatar-photos.component';
 
 const routes: Routes =[
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  { path: '' , redirectTo:'/login', pathMatch:'full'},
   {path:'avatar', component: AvatarPhotosComponent},
   {
     path: '',
@@ -33,7 +29,8 @@ const routes: Routes =[
         loadChildren: () => import('src/app/layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
       }
     ]
-  }, {
+  },
+   {
     path: '**',
     redirectTo: 'login'
   }
